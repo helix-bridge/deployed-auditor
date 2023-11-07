@@ -69,7 +69,7 @@ export class Configure {
               type: e.type,
               fromAddress: e.fromAddress !== undefined ? e.fromAddress : e.type === 'default' ? defaultInfo?.address : oppositeInfo?.address,
               toAddress: e.toAddress !== undefined ? e.toAddress : e.type === 'default' ? defaultInfo?.address : oppositeInfo?.address,
-              messager: e.messager,
+              messager: e.messager !== undefined ? e.messager! : e.type === 'default' ? defaultInfo?.messager! : oppositeInfo?.messager!
           }
       });
       return new Map(infos.map(e => [e.name, e]));

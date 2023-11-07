@@ -19,6 +19,25 @@
             "url": "https://arb1.arbitrum.io/rpc",
             "Eth2ArbReceiveService": "0xc95D939Da72ECe8Bd794d42EaEd28974CDb0ADa2",
             "layerZeroMessager": "0x509354A4ebf98aCC7a65d2264694A65a2938cac9"
+        },
+        {
+            "name": "polygon",
+            "id": 137,
+            "url": "https://polygon-rpc.com",
+            "layerZeroMessager": "0x463D1730a8527CA58d48EF70C7460B9920346567"
+        },
+        {
+            "name": "zkSync",
+            "id": 324,
+            "url": "https://mainnet.era.zksync.io",
+            "layerZeroMessager": "0x96892F3EaD26515592Da38432cFABad991BBd69d",
+            "proxyAdmin": "0xA0d8a3C04580a8503ed3Ff30deBb22B83EE615F4"
+        },
+        {
+            "name": "mantle",
+            "id": 5000,
+            "url": "https://rpc.mantle.xyz",
+            "layerZeroMessager": "0x61B6B8c7C00aA7F060a2BEDeE6b11927CC9c3eF1"
         }
     ],
     "bridges": [
@@ -43,6 +62,42 @@
             "name": "ethereum->arbitrum",
             "type": "default",
             "messager": "arbitrumL1ToL2"
+        },
+        {
+            "name": "arbitrum->mantle",
+            "type": "default"
+        },
+        {
+            "name": "mantle->arbitrum",
+            "type": "default"
+        },
+        {
+            "name": "mantle->zkSync",
+            "type": "default",
+            "toAddress": "0x767Bc046c989f5e63683fB530f939DD34b91ceAC"
+        },
+        {
+            "name": "zkSync->mantle",
+            "type": "default",
+            "fromAddress": "0x767Bc046c989f5e63683fB530f939DD34b91ceAC"
+        },
+        {
+            "name": "arbitrum->zkSync",
+            "type": "default",
+            "toAddress": "0x767Bc046c989f5e63683fB530f939DD34b91ceAC"
+        },
+        {
+            "name": "zkSync->arbitrum",
+            "type": "default",
+            "fromAddress": "0x767Bc046c989f5e63683fB530f939DD34b91ceAC"
+        },
+        {
+            "name": "arbitrum->polygon",
+            "type": "default"
+        },
+        {
+            "name": "polygon->arbitrum",
+            "type": "default"
         }
     ]
 }
