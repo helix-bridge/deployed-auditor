@@ -1,0 +1,48 @@
+{
+    "chains": [
+        {
+            "name": "common",
+            "dao": "0x88a39B052d477CfdE47600a7C9950a441Ce61cb4",
+            "proxyAdmin": "0x601dE3B81c7cE04BecE3b29e5cEe4F3251d250dB",
+            "operator": "0x88a39B052d477CfdE47600a7C9950a441Ce61cb4",
+            "protocolFeeReceiver": "0x88a39B052d477CfdE47600a7C9950a441Ce61cb4"
+        },
+        {
+            "name": "ethereum",
+            "id": 1,
+            "url": "https://eth-mainnet.g.alchemy.com/v2/hLv-Yy1rNIsGzTSzi1wtsFchMTPzXu6J",
+            "Eth2ArbSendService": "0x78a6831Da2293fbEFd0d8aFB4D1f7CBB751e0119"
+        },
+        {
+            "name": "arbitrum",
+            "id": 42161,
+            "url": "https://arb1.arbitrum.io/rpc",
+            "Eth2ArbReceiveService": "0xc95D939Da72ECe8Bd794d42EaEd28974CDb0ADa2",
+            "layerZeroMessager": "0x509354A4ebf98aCC7a65d2264694A65a2938cac9"
+        }
+    ],
+    "bridges": [
+        {
+            "name": "common",
+            "type": "default",
+            "address": "0x94C614DAeFDbf151E1BB53d6A201ae5fF56A9337",
+            "messager": "layerzero"
+        },
+        {
+            "name": "common",
+            "type": "opposite",
+            "address": "0x48d769d5C7ff75703cDd1543A1a2ed9bC9044A23",
+            "messager": "layerzero"
+        },
+        {
+            "name": "arbitrum->ethereum",
+            "type": "opposite",
+            "messager": "arbitrumL1ToL2"
+        },
+        {
+            "name": "ethereum->arbitrum",
+            "type": "default",
+            "messager": "arbitrumL1ToL2"
+        }
+    ]
+}
