@@ -38,6 +38,12 @@
             "id": 5000,
             "url": "https://rpc.mantle.xyz",
             "layerZeroMessager": "0x61B6B8c7C00aA7F060a2BEDeE6b11927CC9c3eF1"
+        },
+        {
+            "name": "scroll",
+            "id": 534352,
+            "url": "https://rpc.scroll.io",
+            "layerZeroMessager": "0x463D1730a8527CA58d48EF70C7460B9920346567"
         }
     ],
     "bridges": [
@@ -97,6 +103,24 @@
         },
         {
             "name": "polygon->arbitrum",
+            "type": "default"
+        },
+        {
+            "name": "scroll->zkSync",
+            "type": "default",
+            "toAddress": "0x767Bc046c989f5e63683fB530f939DD34b91ceAC"
+        },
+        {
+            "name": "zkSync->scroll",
+            "type": "default",
+            "fromAddress": "0x767Bc046c989f5e63683fB530f939DD34b91ceAC"
+        },
+        {
+            "name": "scroll->mantle",
+            "type": "default"
+        },
+        {
+            "name": "mantle->scroll",
             "type": "default"
         }
     ]
