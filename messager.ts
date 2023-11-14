@@ -9,6 +9,7 @@ import {
     Eth2ArbSendServiceContract,
     Eth2ArbReceiveServiceContract,
     LayerZeroMessagerContract,
+    DarwiniaMsglineMessagerContract,
 } from "./contract";
 
 export abstract class Messager {
@@ -71,6 +72,26 @@ export class LayerZeroMessager extends Messager {
     constructor(address: string, signer: Wallet | providers.Provider) {
         const contract = new LayerZeroMessagerContract(address, signer);
         super("layerzero", contract);
+        this.contract = contract;
+    }
+    async isConnected(remoteChainId: number, remoteMessager: string): Promise<boolean> {
+        const remote = await this.contract.remoteMessager(BigNumber.from(remoteChainId.toString()));
+        return remote.messager.toLowerCase() === remoteMessager.toLowerCase();
+    }
+
+    async remoteAppIsSender(remoteChainId: number, localApp: string, remoteApp: string): Promise<boolean> {
+        return remoteApp.toLowerCase() === await this.contract.remoteAppSender(BigNumber.from(remoteChainId.toString()), localApp);
+    }
+    async remoteAppIsReceiver(remoteChainId: number, localApp: string, remoteApp: string): Promise<boolean> {
+        return remoteApp.toLowerCase() === await this.contract.remoteAppReceiver(BigNumber.from(remoteChainId.toString()), localApp);
+    }
+}
+
+export class DarwiniaMsglineMessager extends Messager {
+    public contract: DarwiniaMsglineMessagerContract;
+    constructor(address: string, signer: Wallet | providers.Provider) {
+        const contract = new DarwiniaMsglineMessagerContract(address, signer);
+        super("msgline", contract);
         this.contract = contract;
     }
     async isConnected(remoteChainId: number, remoteMessager: string): Promise<boolean> {

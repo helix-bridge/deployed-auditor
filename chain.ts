@@ -6,6 +6,7 @@ import {
     Eth2ArbSendService,
     Eth2ArbReceiveService,
     LayerZeroMessager,
+    DarwiniaMsglineMessager,
 } from "./messager";
 import {
     Wallet,
@@ -44,6 +45,10 @@ export class Chain {
         }
         if (chainInfo.layerZeroMessager) {
             const messager = new LayerZeroMessager(chainInfo.layerZeroMessager!, this.wallet);
+            this.messagers.set(messager.name, messager);
+        }
+        if (chainInfo.DarwiniaMsglineMessager) {
+            const messager = new DarwiniaMsglineMessager(chainInfo.DarwiniaMsglineMessager!, this.wallet);
             this.messagers.set(messager.name, messager);
         }
     }

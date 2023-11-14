@@ -13,6 +13,7 @@ import { layerZeroMessager } from "./abi/layerZeroMessager";
 import { proxyAdmin } from "./abi/proxyAdmin";
 import { abiEth2ArbReceiveService } from "./abi/abiEth2ArbReceiveService";
 import { abiEth2ArbSendService } from "./abi/abiEth2ArbSendService";
+import { abiDarwiniaMsgLine } from "./abi/abiDarwiniaMsgLine";
 
 export class EthereumContract {
   protected contract: Contract;
@@ -152,6 +153,43 @@ export class LayerZeroMessagerContract extends MessagerContract {
             "uint16",
             "address",
         ], [remoteMessager.lzRemoteChainId, localApp]);
+        const hash = utils.keccak256(encode);
+
+        return (await this.contract.remoteAppSenders(hash)).toLowerCase();
+    }
+}
+
+export interface MsglineRemoteMessager {
+    msglineRemoteChainId: number;
+    messager: string;
+}
+
+export class DarwiniaMsglineMessagerContract extends MessagerContract {
+    constructor(address: string, signer: Wallet | providers.Provider) {
+        super(address, signer, abiDarwiniaMsgLine, "msgline");
+    }
+
+    async remoteMessager(remoteChainId: BigNumber): Promise<MsglineRemoteMessager> {
+        return await this.contract.remoteMessagers(remoteChainId);
+    }
+
+    async remoteAppReceiver(remoteChainId: BigNumber, localApp: string): Promise<string> {
+        const remoteMessager = await this.remoteMessager(remoteChainId);
+        const encode = utils.solidityPack([
+            "uint256",
+            "address",
+        ], [remoteMessager.msglineRemoteChainId, localApp]);
+        const hash = utils.keccak256(encode);
+
+        return (await this.contract.remoteAppReceivers(hash)).toLowerCase();
+    }
+
+    async remoteAppSender(remoteChainId: BigNumber, localApp: string): Promise<string> {
+        const remoteMessager = await this.remoteMessager(remoteChainId);
+        const encode = utils.solidityPack([
+            "uint256",
+            "address",
+        ], [remoteMessager.msglineRemoteChainId, localApp]);
         const hash = utils.keccak256(encode);
 
         return (await this.contract.remoteAppSenders(hash)).toLowerCase();

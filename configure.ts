@@ -13,6 +13,7 @@ export interface ChainInfo {
     Eth2ArbSendService: string | undefined;
     Eth2ArbReceiveService: string | undefined;
     layerZeroMessager: string | undefined;
+    DarwiniaMsglineMessager: string | undefined;
 };
 
 export interface BridgeInfo {
@@ -52,7 +53,8 @@ export class Configure {
               url: e.url,
               Eth2ArbSendService: e.Eth2ArbSendService,
               Eth2ArbReceiveService: e.Eth2ArbReceiveService,
-              layerZeroMessager: e.layerZeroMessager
+              layerZeroMessager: e.layerZeroMessager,
+              DarwiniaMsglineMessager: e.DarwiniaMsglineMessager
           };
       });
       return new Map(infos.map(e => [e.name, e]));

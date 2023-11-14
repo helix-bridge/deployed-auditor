@@ -18,7 +18,8 @@
             "id": 42161,
             "url": "https://arb1.arbitrum.io/rpc",
             "Eth2ArbReceiveService": "0xc95D939Da72ECe8Bd794d42EaEd28974CDb0ADa2",
-            "layerZeroMessager": "0x509354A4ebf98aCC7a65d2264694A65a2938cac9"
+            "layerZeroMessager": "0x509354A4ebf98aCC7a65d2264694A65a2938cac9",
+            "DarwiniaMsglineMessager": "0x3d33856dcf74f110690f5a2647c7dfb9bb5ff2d0"
         },
         {
             "name": "polygon",
@@ -44,6 +45,12 @@
             "id": 534352,
             "url": "https://rpc.scroll.io",
             "layerZeroMessager": "0x463D1730a8527CA58d48EF70C7460B9920346567"
+        },
+        {
+            "name": "darwinia",
+            "id": 46,
+            "url": "https://rpc.darwinia.network",
+            "DarwiniaMsglineMessager": "0x6035Eb7783d7Aab8d0a57a7b154f5DD5D5477Ff2"
         }
     ],
     "bridges": [
@@ -58,6 +65,16 @@
             "type": "opposite",
             "address": "0x48d769d5C7ff75703cDd1543A1a2ed9bC9044A23",
             "messager": "layerzero"
+        },
+        {
+            "name": "darwinia->arbitrum",
+            "type": "default",
+            "messager": "msgline"
+        },
+        {
+            "name": "arbitrum->darwinia",
+            "type": "default",
+            "messager": "msgline"
         },
         {
             "name": "arbitrum->ethereum",
