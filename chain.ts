@@ -17,6 +17,7 @@ export class Chain {
     public wallet: Wallet | providers.Provider;
     public name: string;
     public id: number;
+    public lzChainId: number;
     public dao: string;
     public operator: string;
     public proxyAdmin: ProxyAdmin;
@@ -30,6 +31,7 @@ export class Chain {
         this.proxyAdmin = new ProxyAdmin(chainInfo.proxyAdmin, this.wallet);
         this.name = chainInfo.name;
         this.id = chainInfo.id;
+        this.lzChainId = chainInfo.lzChainId;
         this.dao = chainInfo.dao;
         this.operator = chainInfo.operator;
         this.protocolFeeReceiver = chainInfo.protocolFeeReceiver;

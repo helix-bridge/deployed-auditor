@@ -78,7 +78,7 @@ export class Bridge {
         if (srcMessager === undefined || dstMessager === undefined) {
             return false;
         }
-        return await srcMessager!.isConnected(this.targetBridge.chain.id, dstMessager!.address());
+        return await srcMessager!.isConnected(this.targetBridge.chain, dstMessager!.address());
     }
 
     async checkTargetConnectSource(): Promise<boolean> {
@@ -87,7 +87,7 @@ export class Bridge {
         if (srcMessager === undefined || dstMessager === undefined) {
             return false;
         }
-        return await dstMessager!.isConnected(this.sourceBridge.chain.id, srcMessager!.address());
+        return await dstMessager!.isConnected(this.sourceBridge.chain, srcMessager!.address());
     }
 
     async checkSourceAppConnectTarget(): Promise<boolean> {

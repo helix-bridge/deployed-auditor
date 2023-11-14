@@ -4,6 +4,7 @@ export interface ChainInfo {
     [props: string]: any
     name: string;
     id: number;
+    lzChainId: number;
     dao: string;
     proxyAdmin: string;
     operator: string;
@@ -46,6 +47,7 @@ export class Configure {
           return {
               name: e.name,
               id: e.id,
+              lzChainId: e.lzChainId,
               dao: getOption(e, 'dao'),
               proxyAdmin: getOption(e, 'proxyAdmin'),
               operator: getOption(e, 'operator'),

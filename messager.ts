@@ -12,6 +12,10 @@ import {
     DarwiniaMsglineMessagerContract,
 } from "./contract";
 
+import {
+    Chain
+} from "./chain";
+
 export abstract class Messager {
     public name: string;
     public lnAccessController: LnAccessController;
@@ -25,7 +29,7 @@ export abstract class Messager {
     async checkDao(dao: string): Promise<boolean> {
         return (await this.lnAccessController.dao()) === dao;
     }
-    abstract isConnected(remoteChainId: number, remoteMessager: string): Promise<boolean>;
+    abstract isConnected(remoteChain: Chain, remoteMessager: string): Promise<boolean>;
     abstract remoteAppIsSender(remoteChainId: number, localApp: string, remoteApp: string): Promise<boolean>;
     abstract remoteAppIsReceiver(remoteChainId: number, localApp: string, remoteApp: string): Promise<boolean>;
 };
@@ -37,7 +41,7 @@ export class Eth2ArbSendService extends Messager {
         super("arbitrumL1ToL2", contract);
         this.contract = contract;
     }
-    async isConnected(remoteChainId: number, remoteMessager: string): Promise<boolean> {
+    async isConnected(remoteChain: Chain, remoteMessager: string): Promise<boolean> {
         return remoteMessager.toLowerCase() === await this.contract.remoteMessager();
     }
     async remoteAppIsSender(remoteChainId: number, localApp: string, remoteApp: string): Promise<boolean> {
@@ -55,7 +59,7 @@ export class Eth2ArbReceiveService extends Messager {
         super("arbitrumL1ToL2", contract);
         this.contract = contract;
     }
-    async isConnected(remoteChainId: number, remoteMessager: string): Promise<boolean> {
+    async isConnected(remoteChain: Chain, remoteMessager: string): Promise<boolean> {
         const remoteAddress = await this.contract.remoteMessager();
         return remoteAddress === remoteMessager;
     }
@@ -74,9 +78,9 @@ export class LayerZeroMessager extends Messager {
         super("layerzero", contract);
         this.contract = contract;
     }
-    async isConnected(remoteChainId: number, remoteMessager: string): Promise<boolean> {
-        const remote = await this.contract.remoteMessager(BigNumber.from(remoteChainId.toString()));
-        return remote.messager.toLowerCase() === remoteMessager.toLowerCase();
+    async isConnected(remoteChain: Chain, remoteMessager: string): Promise<boolean> {
+        const remote = await this.contract.remoteMessager(BigNumber.from(remoteChain.id.toString()));
+        return remote.messager.toLowerCase() === remoteMessager.toLowerCase() && remote.lzRemoteChainId === remoteChain.lzChainId;
     }
 
     async remoteAppIsSender(remoteChainId: number, localApp: string, remoteApp: string): Promise<boolean> {
@@ -94,8 +98,8 @@ export class DarwiniaMsglineMessager extends Messager {
         super("msgline", contract);
         this.contract = contract;
     }
-    async isConnected(remoteChainId: number, remoteMessager: string): Promise<boolean> {
-        const remote = await this.contract.remoteMessager(BigNumber.from(remoteChainId.toString()));
+    async isConnected(remoteChain: Chain, remoteMessager: string): Promise<boolean> {
+        const remote = await this.contract.remoteMessager(BigNumber.from(remoteChain.id.toString()));
         return remote.messager.toLowerCase() === remoteMessager.toLowerCase();
     }
 
