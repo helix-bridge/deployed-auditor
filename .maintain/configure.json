@@ -18,7 +18,7 @@
             "name": "arbitrum",
             "id": 42161,
             "lzChainId": 110,
-            "url": "https://arb1.arbitrum.io/rpc",
+            "url": "https://arbitrum-one.publicnode.com",
             "Eth2ArbReceiveService": "0xc95D939Da72ECe8Bd794d42EaEd28974CDb0ADa2",
             "layerZeroMessager": "0x509354A4ebf98aCC7a65d2264694A65a2938cac9",
             "DarwiniaMsglineMessager": "0x3d33856dcf74f110690f5a2647c7dfb9bb5ff2d0"
@@ -57,6 +57,27 @@
             "id": 46,
             "url": "https://rpc.darwinia.network",
             "DarwiniaMsglineMessager": "0x6035Eb7783d7Aab8d0a57a7b154f5DD5D5477Ff2"
+        },
+        {
+            "name": "bsc",
+            "id": 56,
+            "lzChainId": 102,
+            "url": "https://bsc-dataseed1.ninicoin.io",
+            "layerZeroMessager": "0x89AF830781A2C1d3580Db930bea11094F55AfEae"
+        },
+        {
+            "name": "base",
+            "id": 8453,
+            "lzChainId": 184,
+            "url": "https://1rpc.io/base",
+            "layerZeroMessager": "0x61B6B8c7C00aA7F060a2BEDeE6b11927CC9c3eF1"
+        },
+        {
+            "name": "op",
+            "id": 10,
+            "lzChainId": 111,
+            "url": "https://1rpc.io/op",
+            "layerZeroMessager": "0x61B6B8c7C00aA7F060a2BEDeE6b11927CC9c3eF1"
         }
     ],
     "bridges": [
@@ -144,6 +165,30 @@
         },
         {
             "name": "mantle->scroll",
+            "type": "default"
+        },
+        {
+            "name": "bsc->arbitrum",
+            "type": "default"
+        },
+        {
+            "name": "arbitrum->bsc",
+            "type": "default"
+        },
+        {
+            "name": "bsc->base",
+            "type": "default"
+        },
+        {
+            "name": "base->bsc",
+            "type": "default"
+        },
+        {
+            "name": "bsc->op",
+            "type": "default"
+        },
+        {
+            "name": "op->bsc",
             "type": "default"
         }
     ]
