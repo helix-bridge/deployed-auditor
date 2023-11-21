@@ -78,6 +78,13 @@
             "lzChainId": 111,
             "url": "https://1rpc.io/op",
             "layerZeroMessager": "0x61B6B8c7C00aA7F060a2BEDeE6b11927CC9c3eF1"
+        },
+        {
+            "name": "linea",
+            "id": 59144,
+            "lzChainId": 183,
+            "url": "https://rpc.linea.build",
+            "layerZeroMessager": "0x61B6B8c7C00aA7F060a2BEDeE6b11927CC9c3eF1"
         }
     ],
     "bridges": [
@@ -189,6 +196,14 @@
         },
         {
             "name": "op->bsc",
+            "type": "default"
+        },
+        {
+            "name": "bsc->linea",
+            "type": "default"
+        },
+        {
+            "name": "linea->bsc",
             "type": "default"
         }
     ]
