@@ -205,6 +205,14 @@
         {
             "name": "linea->bsc",
             "type": "default"
+        },
+        {
+            "name": "arbitrum->linea",
+            "type": "default"
+        },
+        {
+            "name": "linea->arbitrum",
+            "type": "default"
         }
     ]
 }
