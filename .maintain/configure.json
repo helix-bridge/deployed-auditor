@@ -19,6 +19,7 @@
             "id": 42161,
             "lzChainId": 110,
             "url": "https://arbitrum-one.publicnode.com",
+            "dao": "0x000000000f681D85374225EdEeADC25560C1fb3F",
             "Eth2ArbReceiveService": "0xc95D939Da72ECe8Bd794d42EaEd28974CDb0ADa2",
             "layerZeroMessager": "0x509354A4ebf98aCC7a65d2264694A65a2938cac9",
             "DarwiniaMsglineMessager": "0x3d33856dcf74f110690f5a2647c7dfb9bb5ff2d0"
@@ -27,6 +28,7 @@
             "name": "polygon",
             "id": 137,
             "lzChainId": 109,
+            "dao": "0x000000000f681D85374225EdEeADC25560C1fb3F",
             "url": "https://polygon-rpc.com",
             "layerZeroMessager": "0x463D1730a8527CA58d48EF70C7460B9920346567"
         },
@@ -35,6 +37,7 @@
             "id": 324,
             "lzChainId": 165,
             "url": "https://mainnet.era.zksync.io",
+            "dao": "0x38b9145b6f4f363c42c83f62ee09df0ade6f8dec",
             "layerZeroMessager": "0x96892F3EaD26515592Da38432cFABad991BBd69d",
             "proxyAdmin": "0xA0d8a3C04580a8503ed3Ff30deBb22B83EE615F4"
         },
@@ -43,6 +46,7 @@
             "id": 5000,
             "lzChainId": 181,
             "url": "https://rpc.mantle.xyz",
+            "dao": "0x000000000f681D85374225EdEeADC25560C1fb3F",
             "layerZeroMessager": "0x61B6B8c7C00aA7F060a2BEDeE6b11927CC9c3eF1"
         },
         {
