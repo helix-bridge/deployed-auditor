@@ -89,7 +89,15 @@
             "lzChainId": 183,
             "url": "https://rpc.linea.build",
             "layerZeroMessager": "0x61B6B8c7C00aA7F060a2BEDeE6b11927CC9c3eF1"
+        },
+        {
+            "name": "polygon-zkEVM",
+            "id": 1101,
+            "lzChainId": 158,
+            "url": "https://zkevm-rpc.com",
+            "layerZeroMessager": "0x61B6B8c7C00aA7F060a2BEDeE6b11927CC9c3eF1"
         }
+
     ],
     "bridges": [
         {
@@ -216,6 +224,22 @@
         },
         {
             "name": "linea->arbitrum",
+            "type": "default"
+        },
+        {
+            "name": "polygon->polygon-zkEVM",
+            "type": "default"
+        },
+        {
+            "name": "polygon-zkEVM->polygon",
+            "type": "default"
+        },
+        {
+            "name": "bsc->polygon-zkEVM",
+            "type": "default"
+        },
+        {
+            "name": "polygon-zkEVM->bsc",
             "type": "default"
         }
     ]
