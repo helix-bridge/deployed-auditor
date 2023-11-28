@@ -96,8 +96,14 @@
             "lzChainId": 158,
             "url": "https://zkevm-rpc.com",
             "layerZeroMessager": "0x61B6B8c7C00aA7F060a2BEDeE6b11927CC9c3eF1"
+        },
+        {
+            "name": "gnosis",
+            "id": 100,
+            "lzChainId": 145,
+            "url": "https://rpc.gnosischain.com",
+            "layerZeroMessager": "0x3F7DF5866591e7E48D18C8EbeAE61Bc343a63283"
         }
-
     ],
     "bridges": [
         {
@@ -240,6 +246,14 @@
         },
         {
             "name": "polygon-zkEVM->bsc",
+            "type": "default"
+        },
+        {
+            "name": "bsc->gnosis",
+            "type": "default"
+        },
+        {
+            "name": "gnosis->bsc",
             "type": "default"
         }
     ]
