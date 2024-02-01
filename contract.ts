@@ -9,6 +9,7 @@ import {
 import { erc20 } from "./abi/erc20";
 import { lnDefaultBridge } from "./abi/lnDefaultBridge";
 import { lnOppositeBridge } from "./abi/lnOppositeBridge";
+import { lnv3Bridge } from "./abi/lnv3Bridge";
 import { layerZeroMessager } from "./abi/layerZeroMessager";
 import { proxyAdmin } from "./abi/proxyAdmin";
 import { abiEth2ArbReceiveService } from "./abi/abiEth2ArbReceiveService";
@@ -230,3 +231,13 @@ export class LnOppositeBridgeContract extends LnBridgeContract {
         return await this.contract.messagers(remoteChainId);
     }
 }
+
+export class Lnv3BridgeContract extends LnBridgeContract {
+    constructor(address: string, signer: Wallet | providers.Provider) {
+        super(address, lnv3Bridge, signer);
+    }
+    async messager(remoteChainId: number): Promise<MessagerService> {
+        return await this.contract.messagers(remoteChainId);
+    }
+}
+

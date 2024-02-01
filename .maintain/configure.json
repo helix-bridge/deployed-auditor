@@ -22,7 +22,14 @@
             "dao": "0x000000000f681D85374225EdEeADC25560C1fb3F",
             "Eth2ArbReceiveService": "0xc95D939Da72ECe8Bd794d42EaEd28974CDb0ADa2",
             "layerZeroMessager": "0x509354A4ebf98aCC7a65d2264694A65a2938cac9",
-            "DarwiniaMsglineMessager": "0x3d33856dcf74f110690f5a2647c7dfb9bb5ff2d0"
+            "DarwiniaMsglineMessager": "0x3d33856dcf74f110690f5a2647c7dfb9bb5ff2d0",
+            "tokens": [
+                {
+                    "symbol": "usdt",
+                    "address": "0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9",
+                    "decimals": 6
+                }
+            ]
         },
         {
             "name": "polygon",
@@ -30,7 +37,14 @@
             "lzChainId": 109,
             "dao": "0x000000000f681D85374225EdEeADC25560C1fb3F",
             "url": "https://polygon-rpc.com",
-            "layerZeroMessager": "0x463D1730a8527CA58d48EF70C7460B9920346567"
+            "layerZeroMessager": "0x463D1730a8527CA58d48EF70C7460B9920346567",
+            "tokens": [
+                {
+                    "symbol": "usdt",
+                    "address": "0xc2132D05D31c914a87C6611C10748AEb04B58e8F",
+                    "decimals": 6
+                }
+            ]
         },
         {
             "name": "zkSync",
@@ -39,7 +53,14 @@
             "url": "https://mainnet.era.zksync.io",
             "dao": "0x38b9145b6f4f363c42c83f62ee09df0ade6f8dec",
             "layerZeroMessager": "0x96892F3EaD26515592Da38432cFABad991BBd69d",
-            "proxyAdmin": "0xA0d8a3C04580a8503ed3Ff30deBb22B83EE615F4"
+            "proxyAdmin": "0xA0d8a3C04580a8503ed3Ff30deBb22B83EE615F4",
+            "tokens": [
+                {
+                    "symbol": "usdt",
+                    "address": "0x493257fD37EDB34451f62EDf8D2a0C418852bA4C",
+                    "decimals": 6
+                }
+            ]
         },
         {
             "name": "mantle",
@@ -47,14 +68,28 @@
             "lzChainId": 181,
             "url": "https://rpc.mantle.xyz",
             "dao": "0x000000000f681D85374225EdEeADC25560C1fb3F",
-            "layerZeroMessager": "0x61B6B8c7C00aA7F060a2BEDeE6b11927CC9c3eF1"
+            "layerZeroMessager": "0x61B6B8c7C00aA7F060a2BEDeE6b11927CC9c3eF1",
+            "tokens": [
+                {
+                    "symbol": "usdt",
+                    "address": "0x201EBa5CC46D216Ce6DC03F6a759e8E766e956aE",
+                    "decimals": 6
+                }
+            ]
         },
         {
             "name": "scroll",
             "id": 534352,
             "lzChainId": 214,
             "url": "https://rpc.scroll.io",
-            "layerZeroMessager": "0x463D1730a8527CA58d48EF70C7460B9920346567"
+            "layerZeroMessager": "0x463D1730a8527CA58d48EF70C7460B9920346567",
+            "tokens": [
+                {
+                    "symbol": "usdt",
+                    "address": "0xf55BEC9cafDbE8730f096Aa55dad6D22d44099Df",
+                    "decimals": 6
+                }
+            ]
         },
         {
             "name": "darwinia",
@@ -66,8 +101,15 @@
             "name": "bsc",
             "id": 56,
             "lzChainId": 102,
-            "url": "https://bsc-dataseed1.ninicoin.io",
-            "layerZeroMessager": "0x89AF830781A2C1d3580Db930bea11094F55AfEae"
+            "url": "https://bsc.drpc.org",
+            "layerZeroMessager": "0x89AF830781A2C1d3580Db930bea11094F55AfEae",
+            "tokens": [
+                {
+                    "symbol": "usdt",
+                    "address": "0x55d398326f99059fF775485246999027B3197955",
+                    "decimals": 18
+                }
+            ]
         },
         {
             "name": "base",
@@ -81,28 +123,56 @@
             "id": 10,
             "lzChainId": 111,
             "url": "https://1rpc.io/op",
-            "layerZeroMessager": "0x61B6B8c7C00aA7F060a2BEDeE6b11927CC9c3eF1"
+            "layerZeroMessager": "0x61B6B8c7C00aA7F060a2BEDeE6b11927CC9c3eF1",
+            "tokens": [
+                {
+                    "symbol": "usdt",
+                    "address": "0x94b008aA00579c1307B0EF2c499aD98a8ce58e58",
+                    "decimals": 6
+                }
+            ]
         },
         {
             "name": "linea",
             "id": 59144,
             "lzChainId": 183,
             "url": "https://rpc.linea.build",
-            "layerZeroMessager": "0x61B6B8c7C00aA7F060a2BEDeE6b11927CC9c3eF1"
+            "layerZeroMessager": "0x61B6B8c7C00aA7F060a2BEDeE6b11927CC9c3eF1",
+            "tokens": [
+                {
+                    "symbol": "usdt",
+                    "address": "0xA219439258ca9da29E9Cc4cE5596924745e12B93",
+                    "decimals": 6
+                }
+            ]
         },
         {
             "name": "polygon-zkEVM",
             "id": 1101,
             "lzChainId": 158,
             "url": "https://zkevm-rpc.com",
-            "layerZeroMessager": "0x61B6B8c7C00aA7F060a2BEDeE6b11927CC9c3eF1"
+            "layerZeroMessager": "0x61B6B8c7C00aA7F060a2BEDeE6b11927CC9c3eF1",
+            "tokens": [
+                {
+                    "symbol": "usdt",
+                    "address": "0x1E4a5963aBFD975d8c9021ce480b42188849D41d",
+                    "decimals": 6
+                }
+            ]
         },
         {
             "name": "gnosis",
             "id": 100,
             "lzChainId": 145,
-            "url": "https://rpc.gnosischain.com",
-            "layerZeroMessager": "0x3F7DF5866591e7E48D18C8EbeAE61Bc343a63283"
+            "url": "https://gnosis.drpc.org",
+            "layerZeroMessager": "0x3F7DF5866591e7E48D18C8EbeAE61Bc343a63283",
+            "tokens": [
+                {
+                    "symbol": "usdt",
+                    "address": "0x4ECaBa5870353805a9F068101A40E0f32ed605C6",
+                    "decimals": 6
+                }
+            ]
         }
     ],
     "bridges": [
@@ -256,5 +326,69 @@
             "name": "gnosis->bsc",
             "type": "default"
         }
+    ],
+    "v3bridges": [
+        {
+            "name": "common",
+            "type": "lnv3",
+            "address": "0xbA5D580B18b6436411562981e02c8A9aA1776D10",
+            "messager": "layerzero"
+        },
+        { "name": "polygon->bsc", "tokens": ["usdt"] },
+        { "name": "polygon->arbitrum", "tokens": ["usdt"] },
+        { "name": "polygon->linea", "tokens": ["usdt"] },
+        { "name": "polygon->op", "tokens": ["usdt"] },
+        { "name": "polygon->gnosis", "tokens": ["usdt"] },
+        { "name": "polygon->mantle", "tokens": ["usdt"] },
+        { "name": "polygon->scroll", "tokens": ["usdt"] },
+        { "name": "bsc->polygon", "tokens": ["usdt"] },
+        { "name": "bsc->arbitrum", "tokens": ["usdt"] },
+        { "name": "bsc->linea", "tokens": ["usdt"] },
+        { "name": "bsc->op", "tokens": ["usdt"] },
+        { "name": "bsc->gnosis", "tokens": ["usdt"] },
+        { "name": "bsc->mantle", "tokens": ["usdt"] },
+        { "name": "bsc->scroll", "tokens": ["usdt"] },
+        { "name": "arbitrum->polygon", "tokens": ["usdt"] },
+        { "name": "arbitrum->bsc", "tokens": ["usdt"] },
+        { "name": "arbitrum->linea", "tokens": ["usdt"] },
+        { "name": "arbitrum->op", "tokens": ["usdt"] },
+        { "name": "arbitrum->gnosis", "tokens": ["usdt"] },
+        { "name": "arbitrum->mantle", "tokens": ["usdt"] },
+        { "name": "arbitrum->scroll", "tokens": ["usdt"] },
+        { "name": "linea->polygon", "tokens": ["usdt"] },
+        { "name": "linea->bsc", "tokens": ["usdt"] },
+        { "name": "linea->arbitrum", "tokens": ["usdt"] },
+        { "name": "linea->op", "tokens": ["usdt"] },
+        { "name": "linea->gnosis", "tokens": ["usdt"] },
+        { "name": "linea->mantle", "tokens": ["usdt"] },
+        { "name": "linea->scroll", "tokens": ["usdt"] },
+        { "name": "op->polygon", "tokens": ["usdt"] },
+        { "name": "op->bsc", "tokens": ["usdt"] },
+        { "name": "op->arbitrum", "tokens": ["usdt"] },
+        { "name": "op->linea", "tokens": ["usdt"] },
+        { "name": "op->gnosis", "tokens": ["usdt"] },
+        { "name": "op->mantle", "tokens": ["usdt"] },
+        { "name": "op->scroll", "tokens": ["usdt"] },
+        { "name": "gnosis->polygon", "tokens": ["usdt"] },
+        { "name": "gnosis->bsc", "tokens": ["usdt"] },
+        { "name": "gnosis->arbitrum", "tokens": ["usdt"] },
+        { "name": "gnosis->linea", "tokens": ["usdt"] },
+        { "name": "gnosis->op", "tokens": ["usdt"] },
+        { "name": "gnosis->mantle", "tokens": ["usdt"] },
+        { "name": "gnosis->scroll", "tokens": ["usdt"] },
+        { "name": "mantle->polygon", "tokens": ["usdt"] },
+        { "name": "mantle->bsc", "tokens": ["usdt"] },
+        { "name": "mantle->arbitrum", "tokens": ["usdt"] },
+        { "name": "mantle->linea", "tokens": ["usdt"] },
+        { "name": "mantle->op", "tokens": ["usdt"] },
+        { "name": "mantle->gnosis", "tokens": ["usdt"] },
+        { "name": "mantle->scroll", "tokens": ["usdt"] },
+        { "name": "scroll->polygon", "tokens": ["usdt"] },
+        { "name": "scroll->bsc", "tokens": ["usdt"] },
+        { "name": "scroll->arbitrum", "tokens": ["usdt"] },
+        { "name": "scroll->linea", "tokens": ["usdt"] },
+        { "name": "scroll->op", "tokens": ["usdt"] },
+        { "name": "scroll->gnosis", "tokens": ["usdt"] },
+        { "name": "scroll->mantle", "tokens": ["usdt"] }
     ]
 }

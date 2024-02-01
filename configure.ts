@@ -1,5 +1,11 @@
 import * as fs from "fs";
 
+export interface TokenInfo {
+    symbol: string;
+    address: string;
+    decimals: number;
+}
+
 export interface ChainInfo {
     [props: string]: any
     name: string;
@@ -15,6 +21,7 @@ export interface ChainInfo {
     Eth2ArbReceiveService: string | undefined;
     layerZeroMessager: string | undefined;
     DarwiniaMsglineMessager: string | undefined;
+    tokens: TokenInfo[] | undefined;
 };
 
 export interface BridgeInfo {
@@ -26,11 +33,13 @@ export interface BridgeInfo {
     from: string;
     to: string;
     messager: string;
+    tokens: string[] | undefined;
 };
 
 export interface ConfigInfo {
     chains: ChainInfo[];
     bridges: BridgeInfo[];
+    v3bridges: BridgeInfo[];
 };
 
 export class Configure {
@@ -56,7 +65,8 @@ export class Configure {
               Eth2ArbSendService: e.Eth2ArbSendService,
               Eth2ArbReceiveService: e.Eth2ArbReceiveService,
               layerZeroMessager: e.layerZeroMessager,
-              DarwiniaMsglineMessager: e.DarwiniaMsglineMessager
+              DarwiniaMsglineMessager: e.DarwiniaMsglineMessager,
+              tokens: e.tokens
           };
       });
       return new Map(infos.map(e => [e.name, e]));
@@ -73,7 +83,25 @@ export class Configure {
               type: e.type,
               fromAddress: e.fromAddress !== undefined ? e.fromAddress : e.type === 'default' ? defaultInfo?.address : oppositeInfo?.address,
               toAddress: e.toAddress !== undefined ? e.toAddress : e.type === 'default' ? defaultInfo?.address : oppositeInfo?.address,
-              messager: e.messager !== undefined ? e.messager! : e.type === 'default' ? defaultInfo?.messager! : oppositeInfo?.messager!
+              messager: e.messager !== undefined ? e.messager! : e.type === 'default' ? defaultInfo?.messager! : oppositeInfo?.messager!,
+              tokens: e.tokens
+          }
+      });
+      return new Map(infos.map(e => [e.name, e]));
+  }
+
+  v3bridgeInfos(): Map<string, BridgeInfo> {
+      var commonInfo = this.config.v3bridges.find((e) => e.name === 'common');
+      const infos = this.config.v3bridges.filter((e: BridgeInfo) => e.name !== 'common').map((e: BridgeInfo) => {
+          return {
+              name: e.name,
+              from: e.name.split('->')[0],
+              to: e.name.split('->')[1],
+              type: e.type,
+              fromAddress: e.fromAddress !== undefined ? e.fromAddress : commonInfo?.address,
+              toAddress: e.toAddress !== undefined ? e.toAddress : commonInfo?.address,
+              messager: e.messager !== undefined ? e.messager! : commonInfo?.messager!,
+              tokens: e.tokens
           }
       });
       return new Map(infos.map(e => [e.name, e]));

@@ -4,6 +4,7 @@ import {
     LnBridgeContract,
     LnDefaultBridgeContract,
     LnOppositeBridgeContract,
+    Lnv3BridgeContract,
 } from "./contract";
 import { Log } from "./log";
 import { Messager } from "./messager";
@@ -15,8 +16,10 @@ export class BridgeEndpoint {
         this.chain = chain;
         if (type === 'default') {
             this.bridgeContract = new LnDefaultBridgeContract(address, chain.wallet);
-        } else {
+        } else if (type === 'opposite') {
             this.bridgeContract = new LnOppositeBridgeContract(address, chain.wallet);
+        } else { // lnv3
+            this.bridgeContract = new Lnv3BridgeContract(address, chain.wallet);
         }
     }
 
@@ -117,10 +120,12 @@ export class Bridge {
     }
 }
 
+// for lnv3Bridge: all endpoint should be connected for each other
 export class BridgeManager {
     public log: Log;
     public bridges: Map<string, Bridge> = new Map<string, Bridge>();
-    constructor(bridgeInfos: BridgeInfo[], chainManager: ChainManager) {
+    public v3bridges: Map<string, Bridge> = new Map<string, Bridge>();
+    constructor(bridgeInfos: BridgeInfo[], v3BridgeInfos: BridgeInfo[], chainManager: ChainManager) {
         this.log = new Log();
         for (const bridgeInfo of bridgeInfos) {
             const fromChain = chainManager.chains.get(bridgeInfo.from);
@@ -130,6 +135,15 @@ export class BridgeManager {
                 continue;
             }
             this.bridges.set(bridgeInfo.name, new Bridge(bridgeInfo, fromChain, toChain));
+        }
+        for (const bridgeInfo of v3BridgeInfos) {
+            const fromChain = chainManager.chains.get(bridgeInfo.from);
+            const toChain = chainManager.chains.get(bridgeInfo.to);
+            if (fromChain === undefined || toChain === undefined) {
+                this.log.error(`[${bridgeInfo.name}] bridge's chain not configured`);
+                continue;
+            }
+            this.v3bridges.set(bridgeInfo.name, new Bridge(bridgeInfo, fromChain, toChain));
         }
     }
     // check dao
@@ -212,6 +226,60 @@ export class BridgeManager {
         const bridges = Array.from(this.bridges.values());
         const countEachTime = 6;
         const count = this.bridges.size * countEachTime;
+        var index = 1;
+        await this.log.progress2("waiting for check bridge's message service", async (
+            draw: (current: number, total: number, msg: string, err: string)=>void
+        )=>{ 
+            const bridge = bridges[Math.floor(index / countEachTime)];
+            // check
+            draw(index++, count, `[${bridge.name}]check source messager setting`, '');
+            const sourceMessagerAddress = await bridge.getSourceMessagerFromChain();
+            const sourceMessager = bridge.getSourceMessagerFromConfigure();
+            if (sourceMessagerAddress !== sourceMessager?.address()) {
+                draw(index, count, 'check source messager', `[${bridge.name}]source address not matched, ${sourceMessagerAddress} != ${sourceMessager?.address()}`);
+                return false;
+            }
+            draw(index++, count, `[${bridge.name}]check target messager setting`, '');
+            const targetMessagerAddress = await bridge.getTargetMessagerFromChain();
+            const targetMessager = bridge.getTargetMessagerFromConfigure();
+            if (targetMessagerAddress !== targetMessager?.address()) {
+                draw(index, count, 'check target messager', `[${bridge.name}]target address not matched, ${targetMessagerAddress} != ${targetMessager?.address()}`);
+                return false;
+            }
+            draw(index++, count, `[${bridge.name}]check messager connection source->target`, '');
+            const srcConnected = await bridge.checkSourceConnectTarget();
+            if (!srcConnected) {
+                draw(index, count, 'check connect source->target', `[${bridge.name}]source not connected`);
+                return false;
+            }
+            draw(index++, count, `[${bridge.name}]check messager connection target->source`, '');
+            const dstConnected = await bridge.checkTargetConnectSource();
+            if (!dstConnected) {
+                draw(index, count, 'check connect target->source', `[${bridge.name}]target not connected`);
+                return false;
+            }
+            // check app connection
+            draw(index++, count, `[${bridge.name}]check app connection source->target`, '');
+            const srcAppConnected = await bridge.checkSourceAppConnectTarget();
+            if (!srcAppConnected) {
+                draw(index, count, 'check app connect source->target', `[${bridge.name}]source app not connected`);
+                return false;
+            }
+            draw(index++, count, `[${bridge.name}]check app connection target->source`, '');
+            const dstAppConnected = await bridge.checkTargetAppConnectSource();
+            if (!dstAppConnected) {
+                draw(index, count, 'check app connect target->source', `[${bridge.name}]target app not connected`);
+                return false;
+            }
+            return index < count;
+        });
+    }
+
+    // check messager service
+    async checkv3MessagerService(): Promise<void> {
+        const bridges = Array.from(this.v3bridges.values());
+        const countEachTime = 6;
+        const count = this.v3bridges.size * countEachTime;
         var index = 1;
         await this.log.progress2("waiting for check bridge's message service", async (
             draw: (current: number, total: number, msg: string, err: string)=>void
