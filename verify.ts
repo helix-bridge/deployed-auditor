@@ -17,7 +17,8 @@ async function main() {
     //await bridgeManager.checkBridgeOperator();
     //await bridgeManager.checkProxyAdmin();
     //await bridgeManager.checkMessagerService();
-    await bridgeManager.checkv3MessagerService();
+    //await bridgeManager.checkv3MessagerService();
+    await bridgeManager.checkv3TokenRegisterInfos();
 }
 
 main();

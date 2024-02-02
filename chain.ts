@@ -1,4 +1,4 @@
-import { ChainInfo } from "./configure";
+import { ChainInfo, TokenInfo } from "./configure";
 import { ProxyAdmin } from "./contract";
 import { Log } from "./log";
 import {
@@ -23,6 +23,7 @@ export class Chain {
     public proxyAdmin: ProxyAdmin;
     public protocolFeeReceiver: string;
     public messagers: Map<string, Messager>;
+    public tokens: Map<string, TokenInfo>;
     public log: Log;
 
     constructor(chainInfo: ChainInfo) {
@@ -36,6 +37,7 @@ export class Chain {
         this.operator = chainInfo.operator;
         this.protocolFeeReceiver = chainInfo.protocolFeeReceiver;
         this.messagers = new Map<string, Messager>();
+        this.tokens = new Map<string, TokenInfo>(); 
         this.log = new Log();
         if (chainInfo.Eth2ArbSendService) {
             const messager = new Eth2ArbSendService(chainInfo.Eth2ArbSendService!, this.wallet);
@@ -53,6 +55,9 @@ export class Chain {
             const messager = new DarwiniaMsglineMessager(chainInfo.DarwiniaMsglineMessager!, this.wallet);
             this.messagers.set(messager.name, messager);
         }
+        chainInfo.tokens?.forEach((token: TokenInfo) => {
+            this.tokens.set(token.symbol, token);
+        });
     }
 
     async checkProxyAdminDao(): Promise<boolean> {

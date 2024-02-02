@@ -38,6 +38,21 @@ export class BridgeEndpoint {
     async checkProxyAdmin(): Promise<boolean> {
         return await this.chain.checkProxyAdmin(this.address);
     }
+
+    async checkTokenInfo(symbol: string, remoteEndpoint: BridgeEndpoint): Promise<boolean> {
+        const srcToken = this.chain.tokens.get(symbol);
+        const dstToken = remoteEndpoint.chain.tokens.get(symbol);
+        if (srcToken === undefined || dstToken === undefined) {
+            return false;
+        }
+        return await this.bridgeContract.tokenRegistered(
+            remoteEndpoint.chain.id,
+            srcToken!.address,
+            dstToken!.address,
+            srcToken!.decimals,
+            dstToken!.decimals
+        );
+    }
 }
 
 export class Bridge {
@@ -46,6 +61,7 @@ export class Bridge {
     public messager: string;
     public sourceBridge: BridgeEndpoint;
     public targetBridge: BridgeEndpoint;
+    public symbols: string[] | undefined;
 
     constructor(bridgeInfo: BridgeInfo, fromChain: Chain, toChain: Chain) {
         this.name = bridgeInfo.name;
@@ -53,6 +69,7 @@ export class Bridge {
         this.messager = bridgeInfo.messager;
         this.sourceBridge = new BridgeEndpoint(bridgeInfo.fromAddress, bridgeInfo.type, fromChain);
         this.targetBridge = new BridgeEndpoint(bridgeInfo.toAddress, bridgeInfo.type, toChain);
+        this.symbols = bridgeInfo.tokens;
     }
 
     getSourceMessagerFromConfigure(): Messager | undefined {
@@ -324,6 +341,29 @@ export class BridgeManager {
             if (!dstAppConnected) {
                 draw(index, count, 'check app connect target->source', `[${bridge.name}]target app not connected`);
                 return false;
+            }
+            return index < count;
+        });
+    }
+
+    // check token register info 
+    // get all token symbols to check
+    async checkv3TokenRegisterInfos(): Promise<void> {
+        const bridges = Array.from(this.v3bridges.values());
+        const count = bridges.reduce((sum, current) => sum + current.symbols!.length, 0);
+        var index = 1;
+        var bridgeIndex = 0;
+        await this.log.progress2("waiting for check bridge's token register info", async (
+            draw: (current: number, total: number, msg: string, err: string)=>void
+        )=>{ 
+            const bridge = bridges[bridgeIndex++];
+            for (const symbol of bridge.symbols!) {
+                draw(index++, count, `[${bridge.name}]check app bridge token ${symbol} register info`, '');
+                const tokenRegistered = await bridge.sourceBridge.checkTokenInfo(symbol, bridge.targetBridge);
+                if (!tokenRegistered) {
+                    draw(index, count, 'check app bridge token', `[${bridge.name}-${symbol}] register invalid`);
+                    return false;
+                }
             }
             return index < count;
         });
